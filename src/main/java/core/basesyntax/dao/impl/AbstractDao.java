@@ -55,7 +55,7 @@ public abstract class AbstractDao<T> {
             return list;
         } catch (Exception e) {
             throw new RuntimeException("Can't find elements in table "
-                    + table);
+                    + table, e);
         }
     }
 
