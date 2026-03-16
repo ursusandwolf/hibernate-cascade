@@ -44,7 +44,8 @@ public abstract class AbstractDao<T> {
         }
     }
 
-    public List<T> getAll(String table) {
+    public List<T> getAll() {
+        String table = clazz.getSimpleName();
         try (Session session = factory.openSession()) {
             Transaction tx = session.beginTransaction();
             List<T> list = session
