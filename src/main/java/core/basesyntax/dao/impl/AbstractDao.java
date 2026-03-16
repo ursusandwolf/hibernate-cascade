@@ -60,15 +60,16 @@ public abstract class AbstractDao<T> {
     }
 
     public void remove(T entity) {
-        Session currentSession = null;
+        Session session = null;
         Transaction transaction = null;
         try {
-            currentSession = factory.openSession();
-            transaction = currentSession.beginTransaction();
-            //if (currentSession.contains(entity)
-            T found = currentSession.find(clazz, entity);
-            if (found != null) {
-                currentSession.remove(entity); //
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            if (session.contains(entity)) {
+                session.remove(entity); //
+            } else {
+                T merged = session.merge(entity);
+                session.remove(merged);
             }
             transaction.commit();
         } catch (Exception e) {
@@ -77,8 +78,8 @@ public abstract class AbstractDao<T> {
             }
             throw new RuntimeException("Can't remove entity " + entity, e);
         } finally {
-            if (currentSession != null) {
-                currentSession.close();
+            if (session != null) {
+                session.close();
             }
         }
     }
