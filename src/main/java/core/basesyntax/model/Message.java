@@ -5,8 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -17,10 +16,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(name = "message_details",
-            joinColumns = @JoinColumn(name = "message_id"),
-            inverseJoinColumns = @JoinColumn(name = "message_details_id"))
+    @OneToOne(mappedBy="message",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private MessageDetails messageDetails;
 
     public Long getId() {
