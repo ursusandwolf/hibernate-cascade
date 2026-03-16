@@ -41,4 +41,12 @@ public class MessageDetails {
     public void setSentTime(LocalDateTime sentTime) {
         this.sentTime = sentTime;
     }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
 }
