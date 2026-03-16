@@ -65,7 +65,10 @@ public abstract class AbstractDao<T> {
         try {
             currentSession = factory.openSession();
             transaction = currentSession.beginTransaction();
-            currentSession.remove(entity);
+            T found = currentSession.find(clazz, entity);
+            if (found != null) {
+                currentSession.remove(entity); //
+            }
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
