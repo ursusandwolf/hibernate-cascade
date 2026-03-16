@@ -18,6 +18,9 @@ public class Message {
     private Long id;
     private String content;
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "message_details",
+            joinColumns = @JoinColumn(name = "message_id"),
+            inverseJoinColumns = @JoinColumn(name = "message_details_id"))
     private MessageDetails messageDetails;
 
     public Long getId() {
