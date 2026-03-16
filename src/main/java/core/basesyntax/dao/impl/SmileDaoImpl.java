@@ -21,7 +21,7 @@ public class SmileDaoImpl extends AbstractDao implements SmileDao {
     }
 
     @Override
-    public List<Smile> getAll() {
+    public List<Smile> getAll(String table) {
         return null;
     }
 }

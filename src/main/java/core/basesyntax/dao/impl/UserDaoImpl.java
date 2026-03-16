@@ -23,7 +23,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll(String table) {
         return null;
     }
 

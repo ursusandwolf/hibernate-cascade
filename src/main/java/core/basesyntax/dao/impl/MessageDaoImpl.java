@@ -23,7 +23,7 @@ public class MessageDaoImpl extends AbstractDao implements MessageDao {
     }
 
     @Override
-    public List<Message> getAll() {
+    public List<Message> getAll(String table) {
         return null;
     }
 
