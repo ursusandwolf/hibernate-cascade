@@ -14,17 +14,49 @@ public class CommentDaoImpl extends AbstractDao implements CommentDao {
 
     @Override
     public Comment create(Comment entity) {
-        return null;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            session.persist(entity);
+            transaction.commit();
+            return entity;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Can't insert entity "
+                    + entity, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public Comment get(Long id) {
-        return null;
+        try (Session session = factory.openSession()) {
+            return session.get(Comment.class, id);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't find entity by id " + id, e);
+        }
     }
 
     @Override
     public List<Comment> getAll() {
-        return null;
+        try (Session session = factory.openSession()) {
+            Transaction tx = session.beginTransaction();
+            List<Comment> list = session
+                    .createQuery("from Comment", Comment.class)
+                    .list();
+            tx.commit();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException("Can't find elements in table of "
+                    + Comment.class.getName());
+        }
     }
 
     @Override
