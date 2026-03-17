@@ -61,4 +61,13 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public void addSmile(Smile s) {
+        smiles.add(s);
+    }
+
+    public void removeSmile(Smile s) {
+        smiles.remove(s);
+    }
+
 }

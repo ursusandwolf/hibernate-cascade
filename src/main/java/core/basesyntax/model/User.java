@@ -6,8 +6,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -53,6 +51,7 @@ public class User {
         comments.add(c);
         c.setUser(this);
     }
+
     public void removeComment(Comment c) {
         comments.remove(c);
         c.setUser(null);
