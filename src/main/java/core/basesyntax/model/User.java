@@ -19,11 +19,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
-    @JoinTable(name = "user_comment",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private List<Comment> comments;
 
     public Long getId() {
