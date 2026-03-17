@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class User {
     @OneToMany(mappedBy = "user",
             fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -47,4 +48,14 @@ public class User {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    public void addComment(Comment c) {
+        comments.add(c);
+        c.setUser(this);
+    }
+    public void removeComment(Comment c) {
+        comments.remove(c);
+        c.setUser(null);
+    }
+
 }
