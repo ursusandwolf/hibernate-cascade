@@ -18,8 +18,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.LAZY,
+    @OneToMany(
+            fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST)
     private List<Comment> comments = new ArrayList<>();
 
@@ -45,16 +45,6 @@ public class User {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    public void addComment(Comment c) {
-        comments.add(c);
-        c.setUser(this);
-    }
-
-    public void removeComment(Comment c) {
-        comments.remove(c);
-        c.setUser(null);
     }
 
 }

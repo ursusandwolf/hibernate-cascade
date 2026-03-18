@@ -15,7 +15,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    @OneToOne(mappedBy = "message",
+    @OneToOne(
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private MessageDetails messageDetails;
